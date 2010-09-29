@@ -1,6 +1,6 @@
-Simple Rss Feed Generator
+Simple Rss Feed Editor
 -------------------------
-This is an Rss generator that I have made for personal use. You may use it as you wish :) 
+This is an Rss editor that I have made for personal use. You may use it as you wish :) 
 You should use this script at your own risk.
 
 Description
