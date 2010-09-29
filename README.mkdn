@@ -1,0 +1,39 @@
+Simple Rss Feed Generator
+-------------------------
+This is an Rss generator that I have made for personal use. You may use it as you wish :) 
+You should use this script at your own risk.
+
+Description
+-----------
+This script can publish rss feeds (only items and not images) by a very simple GUI. It's written in PHP and html.
+
+How it works
+------------
+The generated rss can be displayed by browsing rssfeed folder. The maximum rss feeds may be specified by the settings' section in administration panel.
+Via the administration panel you may publish new feeds, edit (or delete) the old ones and also specify the specify the required channel elements or change the username and password.
+All the new feeds are also saved in an XML file called "archive.xml" in rssfeed. There ; are also saved the feeds as a new feed when they are been edited. This is for back up purposes.
+Default username and password is "admin".
+
+Installation
+------------
+Place somewhere in your server the rssfeed folder. You should change the owner of all the files/folders that data will be written to www-data which is the apache webserver.
+So you have to chown the rss.xml , archive.xml , data.xml and adm directory.
+Also you have to change the $prefix parameter with the path where *.xml are located in your server because simplexml seems to work only that way. Look for www.example.com ;)
+Don't forget to change also /home/files/public_html/xml/ess/adm/temp.xml to your temp.xml location :)
+
+Security tips
+-------------
+You may alter the code so the administration page will be located to a directory with a name less obvious than adm.
+Also you may do that again with data.xml that contains the username and password.
+
+Other tips
+----------
+Don't try to insert html when creating new feeds. It won't work! believe me :P
+Use only plain text.
+
+To do
+----
+In the future I may alter this script to:
+Save passwords in a PHP file for better security.
+Add image feeds functionality.
+Add optional channel elements functionality.
