@@ -203,6 +203,7 @@ class writer {
 		$pubDate = date('M,j Y h:i:s A T');
 		$tempfile = '/home/files/public_html/xml/rssfeed/adm/temp.xml';
 		$link = htmlentities($link);
+		$description = htmlentities($description);
 		$source = $this->prefix.''.$filename;
 		if (!copy($source, $tempfile)) 
 		{
@@ -248,6 +249,7 @@ class writer {
 		//important!!!
 		$source = $this->prefix.'archive.xml';
 		$link = htmlentities($link);
+		$description = htmlentities($description);
 		if (!copy( $source,$tempfile)) 
 		{
 			echo "failed to copy archive.xml...\n";
@@ -320,6 +322,7 @@ class writer {
 		//important!!!
 		$source = $this->prefix.'rss.xml';
 		$link = htmlentities($link);
+		$description = htmlentities($description);
 		if (!copy( $source,$tempfile)) 
 		{
 			echo "failed to copy file...\n";
