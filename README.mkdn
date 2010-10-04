@@ -17,9 +17,11 @@ Default username and password is "admin".
 Installation
 ------------
 Place somewhere in your server the rssfeed folder. You should change the owner of all the files/folders that data will be written to www-data which is the apache webserver.
-So you have to chown the rss.xml , archive.xml , data.xml and adm directory.
-Also you have to change the $prefix parameter with the path where *.xml are located in your server because simplexml seems to work only that way. Look for www.example.com ;)
-Don't forget to change also /home/files/public_html/xml/ess/adm/temp.xml to your temp.xml location :)
+So you have to chown the rss.xml , archive.xml and adm directory.
+Also you have to change the $prefix parameter with the path where *.xml are located in your server because simplexml seems to work only that way. Look in configuration.php ;)
+Don't forget to correct also your temp.xml location :)
+
+The current values are from my developement-test installation (with lampp).
 
 Security tips
 -------------
