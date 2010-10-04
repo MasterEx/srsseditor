@@ -23,18 +23,19 @@ session_start();
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ 
+include("configuration.php"); 
+ 
 	if(strcmp($_SESSION['id'],'admin')===0)
 	{		
 		include('../xml_writer.php');
 		$writer = new writer('../rss.xml');
-		if(filesize('../rss.xml')===0 or file_exists('http://www.example.com/rssfeed/rss.xml'))
+		if(filesize('../rss.xml')===0 or file_exists($rsslocation.'rss.xml'))
 		{
 			$writer->open();
 			$writer->close();
 		}
-		$prefix = 'http://www.example.com/rssfeed/';
-		$data = simplexml_load_file($prefix.'data.xml');
-		$xml = simplexml_load_file($prefix.'rss.xml');
+		$xml = simplexml_load_file($rsslocation.'rss.xml');
 		$title = $xml->channel->title;
 		$description = $xml->channel->description;
 		$link = $xml->channel->link;
@@ -51,47 +52,13 @@ session_start();
 				$writer->open();
 				$writer->rce($ntitle,$ndesc,$nlink);
 				$writer->close();				
-				header('http://www.example.com/rssfeed/adm/settings.php');
+				header($rsslocation.'adm/settings.php');
 			}
 			else
 			{
 				$writer->rce_update($ntitle,$ndesc,$nlink);
-				header('http://www.example.com/rssfeed/adm/settings.php');
+				header($rsslocation.'adm/settings.php');
 			}
-		}
-		if($_POST['submit3a'])
-		{
-			$ouser = $_POST['ouser'];
-			$nuser = $_POST['nuser'];
-			$vnuser = $_POST['vnuser'];
-			if(strcmp($ouser,$data->user)===0)
-			{
-				if(strcmp($nuser,$vnuser)===0)
-				{					
-					$writer = new writer('../data.xml');
-					$writer->data_update($nuser,$data->pass,$data->max);
-				}
-			}
-		}
-		if($_POST['submit3b'])
-		{
-			$opass = $_POST['opass'];
-			$npass = $_POST['npass'];
-			$vnpass = $_POST['vnpass'];
-			if(strcmp(md5(md5(md5($opass))),$data->pass)===0)
-			{
-				if(strcmp($npass,$vnpass)===0)
-				{					
-					$writer = new writer('../data.xml');
-					$writer->data_update($data->user,md5(md5(md5($npass))),$data->max);
-				}
-			}
-		}
-		if($_POST['submit3d'])
-		{		
-			$writer = new writer('../data.xml');
-			$max = $_POST['max'];
-			$writer->data_update($data->user,$data->pass,$max);
 		}
 		echo '
 			<html>
@@ -116,61 +83,6 @@ session_start();
 						</tr>
 					</table>
 					<hr>
-					<form action="settings.php" method="post">
-					Change Username:
-						<table>
-							<tr>
-								<td>Old username:</td>
-								<td><input type="text" name="ouser"></td>
-							</tr>
-							<tr>
-								<td>New username:</td>
-								<td><input type="text" name="nuser"></td>
-							</tr>
-							<tr>
-								<td>Verify new username:</td>
-								<td><input type="text" name="vnuser"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input type="submit" name="submit3a" value="update"></td>
-							</tr>
-						</table>
-					</form>
-					</br>
-					<form action="settings.php" method="post">
-					Change Password:
-						<table>
-							<tr>
-								<td>Old password:</td>
-								<td><input type="password" name="opass"></td>
-							</tr>
-							<tr>
-								<td>New password:</td>
-								<td><input type="password" name="npass"></td>
-							</tr>
-							<tr>
-								<td>Verify new password:</td>
-								<td><input type="password" name="vnpass"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input type="submit" name="submit3b" value="update"></td>
-							</tr>
-						</table>
-					</form>
-					<form action="settings.php" method="post">
-						<table>
-							<tr>
-								<td>Max Feeds allowed:</td>
-								<td><input type="text" name="max" value="'; if(isset($max)){ echo $max; }else{ echo $data->max;} echo '"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input type="submit" name="submit3d" value="update"></td>
-							</tr>
-						</table>
-					</form>
 					Required Channel Elements';
 					if(strcmp($title,"")===0 or strcmp($description,"")===0 or strcmp($link,"")===0)
 					{

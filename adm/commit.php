@@ -23,18 +23,21 @@ session_start();
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ 
+include("configuration.php"); 
+ 
 if(strcmp($_SESSION['id'],'admin')===0)
 {
 	if(isset($_POST['submit2']))
 	{		
 		include('../xml_writer.php');
 		$writer = new writer('../rss.xml');
-		if(filesize('../rss.xml')===0 or file_exists('http://www.example.com/rssfeed/rss.xml'))
+		if(filesize('../rss.xml')===0 or file_exists($rsslocation.'rss.xml'))
 		{
 			$writer->open();
 			$writer->close();
 		}
-		$prefix = 'http://www.example.com/rssfeed/';$xml = simplexml_load_file($prefix.'rss.xml');
+		$xml = simplexml_load_file($rsslocation.'rss.xml');
 		$title = $xml->channel->title;
 		$description = $xml->channel->description;
 		$link = $xml->channel->link;
@@ -59,7 +62,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 							<hr><center>';
 				if(strcmp($title,"")===0 or strcmp($description,"")===0 or strcmp($link,"")===0)
 				{
-					echo '<font color="red">You must specify the Required Channel Elements</font> in <a style="color: #800000; text-decoration: none;" href="settings.php">Settings</a> or you may return to <a style="color: #800000; text-decoration: none;" href="panel.php>Home</a>.';
+					echo '<font color="red">You must specify the Required Channel Elements</font> in <a style="color: #800000; text-decoration: none;" href="settings.php">Settings</a> or you may return to <a style="color: #800000; text-decoration: none;" href="panel.php">Home</a>.';
 				}		
 				else
 				{
@@ -68,7 +71,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 					$wr->add_new($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					$writer->add_new_limit($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					echo		'Your RSS Feed was updated!
-									</br>You may review it <a style="color: #800000; text-decoration: none;" href="http://www.example.com/rssfeed">here</a> or you may <a style="color: #800000; text-decoration: none;" href="panel.php">create a new Feed</a>.';
+									</br>You may review it <a style="color: #800000; text-decoration: none;" href="'.$rsslocation.'">here</a> or you may <a style="color: #800000; text-decoration: none;" href="panel.php">create a new Feed</a>.';
 				}				
 				echo		'</center>
 						</center>

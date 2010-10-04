@@ -26,5 +26,5 @@ session_start();
 $_SESSION['id'] = "";
 session_unset();
 session_destroy();
-header('Location: http://www.example.com/rssfeed/adm/index.php');
+header('Location: http://localhost/rss/adm/index.php');
 ?>

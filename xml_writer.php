@@ -22,11 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ 
+include("adm/configuration.php");
+ 
 class writer {
 	
 	private $filename;
 	private $archive;
-	private $prefix = 'http://www.example.com/rssfeed/';
 	
 	function __construct($name) 
 	{
@@ -60,8 +62,8 @@ class writer {
 	{
 		$fh = fopen($this->filename, 'a') or die("can't open file");
 		fwrite($fh, '<title>'.$title.'</title>');
-		fwrite($fh, '<description>'.$desc.'</description>');
-		fwrite($fh, '<link>'.$link.'</link>');
+		fwrite($fh, '<description>'.htmlentities($desc).'</description>');
+		fwrite($fh, '<link>'.htmlentities($link).'</link>');
 	}
 	
 	//Optional Channel Elements
@@ -147,7 +149,7 @@ class writer {
 	function description($arg)
 	{
 		$fh = fopen($this->filename, 'a') or die("can't open file");
-		fwrite($fh, '<description>'.$arg.'</description>');
+		fwrite($fh, '<description>'.htmlentities($arg).'</description>');
 	}
 	
 	function url($arg)
@@ -171,7 +173,7 @@ class writer {
 	function link($arg)
 	{
 		$fh = fopen($this->filename, 'a') or die("can't open file");
-		fwrite($fh, '<link>'.$arg.'</link>');
+		fwrite($fh, '<link>'.htmlentities($arg).'</link>');
 	}
 	
 	//Sub Channel Elements - Item <item></item>
@@ -198,19 +200,18 @@ class writer {
 	
 	//adds new entry with limit and archives all the posts
 	function add_new_limit($title,$description,$link,$category)
-	{
-		$data = simplexml_load_file($this->prefix.'data.xml');
+	{	
+		global $rsslocation;
+		global $templocation;
+		global $maxfeeds;
 		$pubDate = date('M,j Y h:i:s A T');
-		$tempfile = '/home/files/public_html/xml/rssfeed/adm/temp.xml';
-		$link = htmlentities($link);
-		$description = htmlentities($description);
-		$source = $this->prefix.''.$filename;
-		if (!copy($source, $tempfile)) 
+		$source = $rsslocation.''.$filename;
+		if (!copy($source, $templocation)) 
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($tempfile);
+		$xml = simplexml_load_file($templocation);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$this->oitem();
@@ -221,10 +222,9 @@ class writer {
 		$this->category($category);
 		$this->citem();
 		$i=1;
-		$max = (int)$data->max;
 		foreach($xml->channel->item as $item)
 		{
-			if($i===$max)
+			if($i===$maxfeeds)
 			{
 				break;
 			}
@@ -238,24 +238,22 @@ class writer {
 			$i = $i + 1;
 		}
 		$this->close();
-		unlink($tempfile);
+		unlink($templocation);
 	}
 	
 	//method that adds one new entry	
 	function add_new($title,$description,$link,$category)
 	{
+		global $rsslocation;
+		global $templocation;
 		$pubDate = date('M,j Y h:i:s A T');
-		$tempfile = '/home/files/public_html/xml/rssfeed/adm/temp.xml';
-		//important!!!
-		$source = $this->prefix.'archive.xml';
-		$link = htmlentities($link);
-		$description = htmlentities($description);
-		if (!copy( $source,$tempfile)) 
+		$source = $rsslocation.'archive.xml';
+		if (!copy( $source,$templocation)) 
 		{
 			echo "failed to copy archive.xml...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($tempfile);
+		$xml = simplexml_load_file($templocation);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$this->oitem();
@@ -276,20 +274,22 @@ class writer {
 			$this->citem();
 		}
 		$this->close();
-		unlink($tempfile);
+		unlink($templocation);
 	}
 	
 	//updates RCE
 	function rce_update($title,$description,$link)
 	{
+		global $rsslocation;
+		global $templocation;
+		$filename = 'rss.xml';
 		$pubDate = date('M,j Y h:i:s A T');
-		$tempfile = '/home/files/public_html/xml/rssfeed/adm/temp.xml';
-		if (!copy($this->prefix.'rss.xml'/*$filename*/, $tempfile)) 
+		if (!copy($rsslocation.$filename, $templocation))
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($tempfile);
+		$xml = simplexml_load_file($templocation);
 		$this->open();
 		$this->rce($title,$description,$link);
 		foreach($xml->channel->item as $item)
@@ -303,32 +303,22 @@ class writer {
 			$this->citem();
 		}
 		$this->close();
-		unlink($tempfile);
-	}
-	
-	//a function to update data.xml
-	function data_update($admin,$pass,$max)
-	{
-		$fh = fopen($this->filename, 'w') or die("can't open file");
-		fwrite($fh,'<data><user>'.$admin.'</user><pass>'.$pass.'</pass><max>'.$max.'</max></data>');
-		fclose($fh);
+		unlink($templocation);
 	}
 	
 	//edits an entry
 	function edit($pos,$title,$description,$link,$category)
 	{
+		global $rsslocation;
+		global $templocation;
 		$pubDate = date('M,j Y h:i:s A T');
-		$tempfile = '/home/files/public_html/xml/rssfeed/adm/temp.xml';
-		//important!!!
-		$source = $this->prefix.'rss.xml';
-		$link = htmlentities($link);
-		$description = htmlentities($description);
-		if (!copy( $source,$tempfile)) 
+		$source = $rsslocation.'rss.xml';
+		if (!copy( $source,$templocation)) 
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($tempfile);
+		$xml = simplexml_load_file($templocation);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$y = 1;
@@ -356,21 +346,21 @@ class writer {
 			$y = $y + 1;
 		}
 		$this->close();
-		unlink($tempfile);
+		unlink($templocation);
 	}
 	
 	//a function that deletes feeds
 	function delete($pos)
 	{
-		$tempfile = '/home/files/public_html/xml/rssfeed/adm/temp.xml';
-		//important!!!
-		$source = $this->prefix.'rss.xml';
-		if (!copy( $source,$tempfile)) 
+		global $rsslocation;
+		global $templocation;
+		$source = $rsslocation.'rss.xml';
+		if (!copy( $source,$templocation)) 
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($tempfile);
+		$xml = simplexml_load_file($templocation);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$y = 1;
@@ -391,7 +381,7 @@ class writer {
 			$y = $y + 1;
 		}
 		$this->close();
-		unlink($tempfile);
+		unlink($templocation);
 	}
 
 }

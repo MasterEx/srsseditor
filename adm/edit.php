@@ -44,7 +44,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 						</tr>
 					</table>
 					<hr>';
-			$prefix = 'http://www.example.com/rssfeed/';$xml = simplexml_load_file($prefix.'rss.xml');
+			$prefix = 'http://localhost/rss/';$xml = simplexml_load_file($prefix.'rss.xml');
 			$i=1;
 			$flag = 0;
 			echo '<table border="0">';		  

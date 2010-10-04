@@ -23,14 +23,16 @@ session_start();
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ 
+include("configuration.php");
+ 
 	if(isset($_POST['submit']))
 	{
 		$user = $_POST['user'];
 		$pass = $_POST['pass'];
 		$md5 = md5(md5(md5($pass)));		
-		$prefix = 'http://www.example.com/rssfeed/';
-		$data = simplexml_load_file($prefix.'data.xml');
-		if(strcmp($user,$data->user)===0 && strcmp($md5,$data->pass)===0)
+		$prefix = 'http://localhost/rss/';
+		if(strcmp($user,$aname)===0 && strcmp($md5,$apass)===0)
 		{
 			$_SESSION['id'] = "";
 			$_SESSION['id'] = "admin";
@@ -63,7 +65,7 @@ session_start();
 						</tr>
 					</table>
 					<hr>
-					<form method="post" action="http://www.example.com/rssfeed/adm/commit.php">
+					<form method="post" action="http://localhost/rss/adm/commit.php">
 						<table>
 							<tr>
 								<td>Title:</td>

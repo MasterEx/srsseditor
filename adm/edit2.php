@@ -23,11 +23,14 @@ session_start();
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ 
+include("configuration.php");
+ 
 if(strcmp($_SESSION['id'],'admin')===0)
 	{		
 		if(isset($_POST['cancel']))
 		{
-			header('Location: http://www.example.com/rssfeed/adm/edit.php');
+			header('Location: '.$rsslocation.'/adm/edit.php');
 		}
 		echo '
 			<html>
@@ -56,14 +59,14 @@ if(strcmp($_SESSION['id'],'admin')===0)
 				$wr->set_archive('archive.xml');
 				$wr->add_new($_POST['title'],$_POST['description'],$_POST['link'],$_POST['category']);
 				$writer->edit($_POST['pos'],$_POST['title'],$_POST['description'],$_POST['link'],$_POST['category']);
-				echo "The entry was successfully updated!</br>You may review it <a style='color: #800000; text-decoration: none;' href='http://www.example.com/rssfeed'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='http://www.example.com/rssfeed/adm/edit.php>edit another Feed</a>.";
+				echo "The entry was successfully updated!</br>You may review it <a style='color: #800000; text-decoration: none;' href='$rsslocation'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='".$rsslocation."adm/edit.php>edit another Feed</a>.";
 			}
 			if(isset($_POST['ok']))
 			{
 				include('../xml_writer.php');
 				$writer = new writer('../rss.xml');
 				$writer->delete($_POST['pos']);
-				echo "The feed was successfully deleted!</br>You may review it <a style='color: #800000; text-decoration: none;' href='http://www.example.com/rssfeed'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='http://www.example.com/rssfeed/adm/edit.php>edit another Feed</a>.";
+				echo "The feed was successfully deleted!</br>You may review it <a style='color: #800000; text-decoration: none;'$rsslocation'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='".$rsslocation."adm/edit.php>edit another Feed</a>.";
 			}
 			if(isset($_POST['delete']))
 			{
@@ -90,8 +93,8 @@ if(strcmp($_SESSION['id'],'admin')===0)
 					</table></form>';
 			}
 			if(isset($_POST['edit']))
-			{				
-				$prefix = 'http://www.example.com/rssfeed/';$xml = simplexml_load_file($prefix.'rss.xml');
+			{
+				$xml = simplexml_load_file($rsslocation.'rss.xml');
 				$i = $_POST['entry'];
 				echo '<form method="post" action="edit2.php">
 				<input type="hidden" name="pos" value="'.$i.'">

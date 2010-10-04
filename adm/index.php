@@ -23,6 +23,9 @@ session_start();
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ 
+include("configuration.php");
+ 
 if($_SESSION['id']===null)
 {
 	$_SESSION['id'] = 'user';
