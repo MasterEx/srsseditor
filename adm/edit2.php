@@ -55,9 +55,12 @@ if(strcmp($_SESSION['id'],'admin')===0)
 			{
 				include('../xml_writer.php');
 				$writer = new writer('../rss.xml');
-				$wr = new writer('../archive.xml');
-				$wr->set_archive('archive.xml');
-				$wr->add_new($_POST['title'],$_POST['description'],$_POST['link'],$_POST['category']);
+				if($archive)
+				{
+					$wr = new writer('../archive.xml');
+					$wr->set_archive('archive.xml');
+					$wr->add_new($_POST['title'],$_POST['description'],$_POST['link'],$_POST['category']);
+				}
 				$writer->edit($_POST['pos'],$_POST['title'],$_POST['description'],$_POST['link'],$_POST['category']);
 				echo "The entry was successfully updated!</br>You may review it <a style='color: #800000; text-decoration: none;' href='$rsslocation'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='".$rsslocation."adm/edit.php>edit another Feed</a>.";
 			}
