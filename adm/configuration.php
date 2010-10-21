@@ -33,6 +33,8 @@
  $apass = "a5c1f56f8b914e6da0f86af7b0612186";
  
  // General Settings - change this to your configuration
+ $archive = 0; 		//switch - 0 no, 1 yes
+ $feedslimit = 1;	//switch - 0 no, 1 yes
  $maxfeeds = 8;
  $rsslocation = "http://localhost/rss/";
  $templocation = "/opt/lampp/htdocs/rss/adm/temp.xml";
