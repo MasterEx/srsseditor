@@ -66,13 +66,13 @@ if(strcmp($_SESSION['id'],'admin')===0)
 				}		
 				else
 				{
-					if($archive)
+					if($archive==1)
 					{
 						$wr = new writer('../archive.xml');
 						$wr->set_archive('archive.xml');
 						$wr->add_new($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					}
-					if($feedslimit)
+					if($feedslimit==1)
 					{
 						$writer->add_new_limit($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					}

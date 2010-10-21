@@ -55,7 +55,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 			{
 				include('../xml_writer.php');
 				$writer = new writer('../rss.xml');
-				if($archive)
+				if($archive==1)
 				{
 					$wr = new writer('../archive.xml');
 					$wr->set_archive('archive.xml');
