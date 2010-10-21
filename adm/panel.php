@@ -32,7 +32,7 @@ include("configuration.php");
 		$pass = $_POST['pass'];
 		$md5 = md5(md5(md5($pass)));		
 		$prefix = 'http://localhost/rss/';
-		if(strcmp($user,$aname)===0 && strcmp($md5,$apass)===0)
+		if(strcmp($user,$ADMIN_NAME)===0 && strcmp($md5,$ADMIN_PASSWORD)===0)
 		{
 			$_SESSION['id'] = "";
 			$_SESSION['id'] = "admin";

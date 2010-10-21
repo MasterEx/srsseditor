@@ -30,7 +30,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 	{		
 		if(isset($_POST['cancel']))
 		{
-			header('Location: '.$rsslocation.'/adm/edit.php');
+			header('Location: '.$RSS_LOCATION.'/adm/edit.php');
 		}
 		echo '
 			<html>
@@ -55,21 +55,21 @@ if(strcmp($_SESSION['id'],'admin')===0)
 			{
 				include('../xml_writer.php');
 				$writer = new writer('../rss.xml');
-				if($archive==1)
+				if($ARCHIVE==1)
 				{
 					$wr = new writer('../archive.xml');
 					$wr->set_archive('archive.xml');
 					$wr->add_new($_POST['title'],$_POST['description'],$_POST['link'],$_POST['category']);
 				}
 				$writer->edit($_POST['pos'],$_POST['title'],$_POST['description'],$_POST['link'],$_POST['category']);
-				echo "The entry was successfully updated!</br>You may review it <a style='color: #800000; text-decoration: none;' href='$rsslocation'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='".$rsslocation."adm/edit.php>edit another Feed</a>.";
+				echo "The entry was successfully updated!</br>You may review it <a style='color: #800000; text-decoration: none;' href='$RSS_LOCATION'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='".$RSS_LOCATION."adm/edit.php>edit another Feed</a>.";
 			}
 			if(isset($_POST['ok']))
 			{
 				include('../xml_writer.php');
 				$writer = new writer('../rss.xml');
 				$writer->delete($_POST['pos']);
-				echo "The feed was successfully deleted!</br>You may review it <a style='color: #800000; text-decoration: none;'$rsslocation'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='".$rsslocation."adm/edit.php>edit another Feed</a>.";
+				echo "The feed was successfully deleted!</br>You may review it <a style='color: #800000; text-decoration: none;'$RSS_LOCATION'>here</a> or you may <a style='color: #800000; text-decoration: none;' href='".$RSS_LOCATION."adm/edit.php>edit another Feed</a>.";
 			}
 			if(isset($_POST['delete']))
 			{
@@ -97,7 +97,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 			}
 			if(isset($_POST['edit']))
 			{
-				$xml = simplexml_load_file($rsslocation.'rss.xml');
+				$xml = simplexml_load_file($RSS_LOCATION.'rss.xml');
 				$i = $_POST['entry'];
 				echo '<form method="post" action="edit2.php">
 				<input type="hidden" name="pos" value="'.$i.'">

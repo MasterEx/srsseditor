@@ -32,12 +32,12 @@ if(strcmp($_SESSION['id'],'admin')===0)
 	{		
 		include('../xml_writer.php');
 		$writer = new writer('../rss.xml');
-		if(filesize('../rss.xml')===0 or file_exists($rsslocation.'rss.xml'))
+		if(filesize('../rss.xml')===0 or file_exists($RSS_LOCATION.'rss.xml'))
 		{
 			$writer->open();
 			$writer->close();
 		}
-		$xml = simplexml_load_file($rsslocation.'rss.xml');
+		$xml = simplexml_load_file($RSS_LOCATION.'rss.xml');
 		$title = $xml->channel->title;
 		$description = $xml->channel->description;
 		$link = $xml->channel->link;
@@ -66,13 +66,13 @@ if(strcmp($_SESSION['id'],'admin')===0)
 				}		
 				else
 				{
-					if($archive==1)
+					if($ARCHIVE==1)
 					{
 						$wr = new writer('../archive.xml');
 						$wr->set_archive('archive.xml');
 						$wr->add_new($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					}
-					if($feedslimit==1)
+					if($FEEDS_LIMIT==1)
 					{
 						$writer->add_new_limit($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					}
@@ -81,7 +81,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 						$writer->add_new($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					}
 					echo		'Your RSS Feed was updated!
-									</br>You may review it <a style="color: #800000; text-decoration: none;" href="'.$rsslocation.'">here</a> or you may <a style="color: #800000; text-decoration: none;" href="panel.php">create a new Feed</a>.';
+									</br>You may review it <a style="color: #800000; text-decoration: none;" href="'.$RSS_LOCATION.'">here</a> or you may <a style="color: #800000; text-decoration: none;" href="panel.php">create a new Feed</a>.';
 				}				
 				echo		'</center>
 						</center>

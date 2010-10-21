@@ -28,7 +28,7 @@ include("adm/configuration.php");
 class writer {
 	
 	private $filename;
-	private $archive;
+	private $ARCHIVE;
 	
 	function __construct($name) 
 	{
@@ -201,17 +201,17 @@ class writer {
 	//adds new entry with limit and archives all the posts
 	function add_new_limit($title,$description,$link,$category)
 	{	
-		global $rsslocation;
-		global $templocation;
-		global $maxfeeds;
+		global $RSS_LOCATION;
+		global $TEMP_LOCATION;
+		global $MAX_FEEDS;
 		$pubDate = date('M,j Y h:i:s A T');
-		$source = $rsslocation.''.$filename;
-		if (!copy($source, $templocation)) 
+		$source = $RSS_LOCATION.''.$filename;
+		if (!copy($source, $TEMP_LOCATION)) 
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($templocation);
+		$xml = simplexml_load_file($TEMP_LOCATION);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$this->oitem();
@@ -224,7 +224,7 @@ class writer {
 		$i=1;
 		foreach($xml->channel->item as $item)
 		{
-			if($i===$maxfeeds)
+			if($i===$MAX_FEEDS)
 			{
 				break;
 			}
@@ -238,22 +238,22 @@ class writer {
 			$i = $i + 1;
 		}
 		$this->close();
-		unlink($templocation);
+		unlink($TEMP_LOCATION);
 	}
 	
 	//method that adds one new entry	
 	function add_new($title,$description,$link,$category)
 	{
-		global $rsslocation;
-		global $templocation;
+		global $RSS_LOCATION;
+		global $TEMP_LOCATION;
 		$pubDate = date('M,j Y h:i:s A T');
-		$source = $rsslocation.'archive.xml';
-		if (!copy( $source,$templocation)) 
+		$source = $RSS_LOCATION.'archive.xml';
+		if (!copy( $source,$TEMP_LOCATION)) 
 		{
 			echo "failed to copy archive.xml...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($templocation);
+		$xml = simplexml_load_file($TEMP_LOCATION);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$this->oitem();
@@ -274,22 +274,22 @@ class writer {
 			$this->citem();
 		}
 		$this->close();
-		unlink($templocation);
+		unlink($TEMP_LOCATION);
 	}
 	
 	//updates RCE
 	function rce_update($title,$description,$link)
 	{
-		global $rsslocation;
-		global $templocation;
+		global $RSS_LOCATION;
+		global $TEMP_LOCATION;
 		$filename = 'rss.xml';
 		$pubDate = date('M,j Y h:i:s A T');
-		if (!copy($rsslocation.$filename, $templocation))
+		if (!copy($RSS_LOCATION.$filename, $TEMP_LOCATION))
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($templocation);
+		$xml = simplexml_load_file($TEMP_LOCATION);
 		$this->open();
 		$this->rce($title,$description,$link);
 		foreach($xml->channel->item as $item)
@@ -303,22 +303,22 @@ class writer {
 			$this->citem();
 		}
 		$this->close();
-		unlink($templocation);
+		unlink($TEMP_LOCATION);
 	}
 	
 	//edits an entry
 	function edit($pos,$title,$description,$link,$category)
 	{
-		global $rsslocation;
-		global $templocation;
+		global $RSS_LOCATION;
+		global $TEMP_LOCATION;
 		$pubDate = date('M,j Y h:i:s A T');
-		$source = $rsslocation.'rss.xml';
-		if (!copy( $source,$templocation)) 
+		$source = $RSS_LOCATION.'rss.xml';
+		if (!copy( $source,$TEMP_LOCATION)) 
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($templocation);
+		$xml = simplexml_load_file($TEMP_LOCATION);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$y = 1;
@@ -346,21 +346,21 @@ class writer {
 			$y = $y + 1;
 		}
 		$this->close();
-		unlink($templocation);
+		unlink($TEMP_LOCATION);
 	}
 	
 	//a function that deletes feeds
 	function delete($pos)
 	{
-		global $rsslocation;
-		global $templocation;
-		$source = $rsslocation.'rss.xml';
-		if (!copy( $source,$templocation)) 
+		global $RSS_LOCATION;
+		global $TEMP_LOCATION;
+		$source = $RSS_LOCATION.'rss.xml';
+		if (!copy( $source,$TEMP_LOCATION)) 
 		{
 			echo "failed to copy file...\n";
 			exit();
 		}
-		$xml = simplexml_load_file($templocation);
+		$xml = simplexml_load_file($TEMP_LOCATION);
 		$this->open();
 		$this->rce($xml->channel->title,$xml->channel->description,$xml->channel->link);
 		$y = 1;
@@ -381,7 +381,7 @@ class writer {
 			$y = $y + 1;
 		}
 		$this->close();
-		unlink($templocation);
+		unlink($TEMP_LOCATION);
 	}
 
 }

@@ -30,12 +30,12 @@ include("configuration.php");
 	{		
 		include('../xml_writer.php');
 		$writer = new writer('../rss.xml');
-		if(filesize('../rss.xml')===0 or file_exists($rsslocation.'rss.xml'))
+		if(filesize('../rss.xml')===0 or file_exists($RSS_LOCATION.'rss.xml'))
 		{
 			$writer->open();
 			$writer->close();
 		}
-		$xml = simplexml_load_file($rsslocation.'rss.xml');
+		$xml = simplexml_load_file($RSS_LOCATION.'rss.xml');
 		$title = $xml->channel->title;
 		$description = $xml->channel->description;
 		$link = $xml->channel->link;
@@ -52,12 +52,12 @@ include("configuration.php");
 				$writer->open();
 				$writer->rce($ntitle,$ndesc,$nlink);
 				$writer->close();				
-				header($rsslocation.'adm/settings.php');
+				header($RSS_LOCATION.'adm/settings.php');
 			}
 			else
 			{
 				$writer->rce_update($ntitle,$ndesc,$nlink);
-				header($rsslocation.'adm/settings.php');
+				header($RSS_LOCATION.'adm/settings.php');
 			}
 		}
 		echo '
