@@ -72,7 +72,14 @@ if(strcmp($_SESSION['id'],'admin')===0)
 						$wr->set_archive('archive.xml');
 						$wr->add_new($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
 					}
-					$writer->add_new_limit($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
+					if($feedslimit)
+					{
+						$writer->add_new_limit($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
+					}
+					else
+					{
+						$writer->add_new($_POST['title'],$_POST['desc'],$_POST['link'],$_POST['cat']);
+					}
 					echo		'Your RSS Feed was updated!
 									</br>You may review it <a style="color: #800000; text-decoration: none;" href="'.$rsslocation.'">here</a> or you may <a style="color: #800000; text-decoration: none;" href="panel.php">create a new Feed</a>.';
 				}				
