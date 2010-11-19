@@ -149,7 +149,7 @@ class writer {
 	function description($arg)
 	{
 		$fh = fopen($this->filename, 'a') or die("can't open file");
-		fwrite($fh, '<description>'.htmlentities($arg).'</description>');
+		fwrite($fh, '<description>'.htmlspecialchars($arg).'</description>');
 	}
 	
 	function url($arg)
