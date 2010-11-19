@@ -23,8 +23,9 @@ session_start();
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ include("configuration.php");
 $_SESSION['id'] = "";
 session_unset();
 session_destroy();
-header('Location: http://localhost/rss/adm/index.php');
+header('Location: '.$RSS_LOCATION.'adm/index.php');
 ?>
