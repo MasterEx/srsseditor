@@ -62,7 +62,7 @@ class writer {
 	{
 		$fh = fopen($this->filename, 'a') or die("can't open file");
 		fwrite($fh, '<title>'.$title.'</title>');
-		fwrite($fh, '<description>'.htmlentities($desc).'</description>');
+		fwrite($fh, '<description>'.htmlspecialchars($desc).'</description>');
 		fwrite($fh, '<link>'.htmlentities($link).'</link>');
 	}
 	
