@@ -30,8 +30,7 @@ include("configuration.php");
 	{
 		$user = $_POST['user'];
 		$pass = $_POST['pass'];
-		$md5 = md5(md5(md5($pass)));		
-		$prefix = 'http://localhost/rss/';
+		$md5 = md5(md5(md5($pass)));
 		if(strcmp($user,$ADMIN_NAME)===0 && strcmp($md5,$ADMIN_PASSWORD)===0)
 		{
 			$_SESSION['id'] = "";
@@ -65,7 +64,7 @@ include("configuration.php");
 						</tr>
 					</table>
 					<hr>
-					<form method="post" action="http://localhost/rss/adm/commit.php">
+					<form method="post" action="'.$RSS_LOCATION.'adm/commit.php">
 						<table>
 							<tr>
 								<td>Title:</td>
