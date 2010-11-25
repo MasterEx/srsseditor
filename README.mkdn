@@ -28,7 +28,6 @@ The current values are from my developement-test installation (with lampp).
 Security tips
 -------------
 You may alter the code so the administration page will be located to a directory with a name less obvious than adm.
-Also you may do that again with data.xml that contains the username and password.
 
 Other tips
 ----------
