@@ -18,6 +18,8 @@ Installation
 ------------
 Place somewhere in your server the rssfeed folder. You should change the owner of all the files/folders that data will be written to www-data which is the apache webserver.
 So you have to chown the rss.xml , archive.xml and adm directory.
+
+You have to rename the adm/configuration.php.default to adm/configuration.php
 Also you have to change the $prefix parameter with the path where *.xml are located in your server because simplexml seems to work only that way. Look in configuration.php ;)
 Don't forget to correct also your temp.xml location :)
 
@@ -36,6 +38,5 @@ Use only plain text.
 To do
 ----
 In the future I may alter this script to:
-Save passwords in a PHP file for better security.
 Add image feeds functionality.
 Add optional channel elements functionality.
