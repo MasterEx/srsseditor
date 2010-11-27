@@ -26,6 +26,7 @@ DEPENDENCIES: bash, md5sum
 * Step7: go to your adm page and post a feed... you're done!
 
 --Known issues of install.sh:
+
 * In freebsd the md5sum is called md5. Just change md5sum to md5.
 
 Updates
@@ -44,5 +45,6 @@ Use only plain text.
 To do
 ----
 In the future I may alter this script to:
+
 * Add image feeds functionality.
 * Add optional channel elements functionality.
