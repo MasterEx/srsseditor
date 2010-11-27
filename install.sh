@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # The MIT License - see License.txt
 #
@@ -93,5 +93,7 @@ chmod 777 rss.xml archive.xml adm
 
 echo "chmod 700 install.sh"
 chmod 700 install.sh
+
+echo "See adm/configuration.php for more exensive configuration of srsseditor"
 
 exit 0
