@@ -9,23 +9,28 @@ This script can publish rss feeds (only items and not images) by a very simple G
 
 How it works
 ------------
-The generated rss can be displayed by browsing rssfeed folder. The maximum rss feeds may be specified by the settings' section in administration panel.
+The generated rss can be displayed by browsing rssfeed folder. The maximum rss feeds may be specified in adm/configuration.php .
 Via the administration panel you may publish new feeds, edit (or delete) the old ones and also specify the specify the required channel elements or change the username and password.
-All the new feeds are also saved in an XML file called "archive.xml" in rssfeed. There ; are also saved the feeds as a new feed when they are been edited. This is for back up purposes.
-Default username and password is "admin".
+All the new feeds and changes are optionally saved in an XML file called "archive.xml" in rssfeed for back up purposes.
 
 Installation
 ------------
-Place somewhere in your server the rssfeed folder. You should change the owner of all the files/folders that data will be written to www-data which is the apache webserver.
-So you have to chown the rss.xml , archive.xml and adm directory.
+DEPENDENCIES: bash, md5sum
 
-You have to rename the adm/configuration.php.default to adm/configuration.php .
-Also you have to change the $prefix parameter with the path where *.xml are located in your server because simplexml seems to work only that way. Look in configuration.php ;)
-Don't forget to correct also your temp.xml location :)
+* Step1: git clone git://github.com/MasterEx/srsseditor.git
+* Step2: cd .. and mv srsseditor some_other_name (optional)
+* Step3: chmod +x insatll.sh
+* Step4: ./install.sh
+* Step5: chmod 700 install.sh (optional)
+* Step6: edit adm/configuration.php for further configuration (optional)
+* Step7: go to your adm page and post a feed... you're done!
 
-Rename archive.xml.default to archive.xml and rss.xml.default to rss.xml .
+--Known issues of install.sh:
+* In freebsd the md5sum is called md5. Just change md5sum to md5.
 
-The current values are from my developement-test installation (with lampp).
+Updates
+-------
+The xmls and configuration files are ignored by git, so you can easily update srsseditor by doing git pull without losing you feeds or your configuration.
 
 Security tips
 -------------
@@ -39,5 +44,5 @@ Use only plain text.
 To do
 ----
 In the future I may alter this script to:
-Add image feeds functionality.
-Add optional channel elements functionality.
+* Add image feeds functionality.
+* Add optional channel elements functionality.
