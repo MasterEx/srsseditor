@@ -37,8 +37,7 @@ if($_SESSION['id']===null)
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 		<META AUTHOR="Periklis Ntanasis a.k.a. Master_ex">
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-		<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-		<LINK REL="SHORTCUT ICON" HREF="favicon.ico"> 
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	</head>
 	<center><h2>Administrator Login</h2></center>
 	<?php if(strcmp($_SESSION['id'],'FAIL')===0){ echo "<center><font color='red'>Your username or password is wrong!</font></center>"; session_destroy(); $_SESSION['id'] = 'user'; } ?>

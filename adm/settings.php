@@ -66,8 +66,7 @@ include("configuration.php");
 					<title>RSS Feed -- Administration Panel</title>
 					<META AUTHOR="Periklis Ntanasis a.k.a. Master_ex">
 					<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-					<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-					<LINK REL="SHORTCUT ICON" HREF="favicon.ico"> 
+					<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 				</head>
 				<center>';
 				if(!strcmp($nuser,$vnuser)===0 && isset($_POST['submit3a']))
