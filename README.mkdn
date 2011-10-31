@@ -18,7 +18,7 @@ Installation
 DEPENDENCIES: bash, md5sum
 
 * Step1: git clone git://github.com/MasterEx/srsseditor.git
-* Step2: cd .. and mv srsseditor some_other_name (optional)
+* Step2: mv srsseditor some_other_name (optional)
 * Step3: chmod +x insatll.sh
 * Step4: ./install.sh
 * Step5: chmod 700 install.sh (optional)
@@ -42,7 +42,13 @@ Other tips
 Don't try to insert html when creating new feeds. It won't work! believe me :P
 Use only plain text.
 
-To do
+UPDATE: Not sure about this. It's permitted to have html in rss item's description. 
+
+License
+-------
+It's licensed under MIT license. TinyMCE is licensed under the LGPL license.
+
+TODO
 ----
 In the future I may alter this script to:
 
