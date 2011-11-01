@@ -3,3 +3,5 @@ adm/configuration.php
 #my xmls
 archive.xml
 rss.xml
+#human readable rss
+rss.php

@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="el" xml:lang="el">
+    <head>
+        <META AUTHOR="Master_ex">
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+        <title>RSS Feed</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+	
+	<h1>RSS FEEDS</h1>
+		
+		<?php
+
+		require_once("rss_reader.php");
+
+
+		$reader = new Reader('rss.xml');
+		$feeds = $reader->getFeeds();
+
+		foreach($feeds as $feed) {
+			echo "<h2>&bull;<a href='".$feed["link"]."'>".$feed["title"]."</a></h2><br \>".$feed["description"]." ";
+		}
+
+		?>
+		
+ </body>
+</html>
