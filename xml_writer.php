@@ -228,6 +228,7 @@ class writer {
 		$this->link($link);
 		$this->pubDate($pubDate);
 		$this->category($category);
+		$this->guid($link);
 		$this->citem();
 		$i=1;
 		foreach($xml->channel->item as $item)
@@ -242,6 +243,7 @@ class writer {
 			$this->link($item->link);
 			$this->pubDate($item->pubDate);
 			$this->category($item->category);
+			$this->guid($link);
 			$this->citem();
 			$i = $i + 1;
 		}
@@ -270,6 +272,7 @@ class writer {
 		$this->link($link);
 		$this->pubDate($pubDate);
 		$this->category($category);
+		$this->guid($link);
 		$this->citem();
 		foreach($xml->channel->item as $item)
 		{
@@ -279,6 +282,7 @@ class writer {
 			$this->link($item->link);
 			$this->pubDate($item->pubDate);
 			$this->category($item->category);
+			$this->guid($link);
 			$this->citem();
 		}
 		$this->close();
