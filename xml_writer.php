@@ -42,11 +42,13 @@ class writer {
 	
 	function open()
 	{
+		global $RSS_LOCATION;
 		$fh = fopen($this->filename, 'w') or die("can't open file");
 		fwrite($fh, '<?xml version="1.0" encoding="UTF-8" ?>');
 		$fh = fopen($this->filename, 'a') or die("can't open file");
-		fwrite($fh, '<rss version="2.0">');
+		fwrite($fh, '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">');
 		fwrite($fh, '<channel>');
+		fwrite($fh, '<atom:link href="'.$RSS_LOCATION.'rss.xml" rel="self" type="application/rss+xml" />');
 	}
 
 	function close()
