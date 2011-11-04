@@ -54,3 +54,4 @@ In the future I may alter this script to:
 
 * Add image feeds functionality.
 * Add optional channel elements functionality.
+* Use global variables that sets rss.xml and archive.xml names.
