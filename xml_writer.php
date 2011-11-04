@@ -210,7 +210,7 @@ class writer {
 		global $RSS_LOCATION;
 		global $TEMP_LOCATION;
 		global $MAX_FEEDS;
-		$pubDate = date('M,j Y h:i:s A T');
+		$pubDate = date('D, d M Y H:i:s O');
 		$source = $RSS_LOCATION.''.$filename;
 		if (!copy($source, $TEMP_LOCATION)) 
 		{
