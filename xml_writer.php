@@ -176,6 +176,12 @@ class writer {
 		fwrite($fh, '<link>'.htmlentities($arg).'</link>');
 	}
 	
+	function guid($arg)
+	{
+		$fh = fopen($this->filename, 'a') or die("can't open file");
+		fwrite($fh, '<guid>'.htmlentities($arg).'</guid>');
+	}
+	
 	//Sub Channel Elements - Item <item></item>
 	function oitem()
 	{
