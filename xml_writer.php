@@ -243,7 +243,7 @@ class writer {
 			$this->link($item->link);
 			$this->pubDate($item->pubDate);
 			$this->category($item->category);
-			$this->guid($link);
+			$this->guid($item->link);
 			$this->citem();
 			$i = $i + 1;
 		}
@@ -282,7 +282,7 @@ class writer {
 			$this->link($item->link);
 			$this->pubDate($item->pubDate);
 			$this->category($item->category);
-			$this->guid($link);
+			$this->guid($item->link);
 			$this->citem();
 		}
 		$this->close();
