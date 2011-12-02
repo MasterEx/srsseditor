@@ -295,7 +295,7 @@ class writer {
 		global $RSS_LOCATION;
 		global $TEMP_LOCATION;
 		$filename = 'rss.xml';
-		$pubDate = date('M,j Y h:i:s A T');
+		$pubDate = date('D, d M Y H:i:s O');
 		if (!copy($RSS_LOCATION.$filename, $TEMP_LOCATION))
 		{
 			echo "failed to copy file...\n";
@@ -312,6 +312,7 @@ class writer {
 			$this->link($item->link);
 			$this->pubDate($item->pubDate);
 			$this->category($item->category);
+			$this->guid($item->link);
 			$this->citem();
 		}
 		$this->close();
@@ -323,7 +324,7 @@ class writer {
 	{
 		global $RSS_LOCATION;
 		global $TEMP_LOCATION;
-		$pubDate = date('M,j Y h:i:s A T');
+		$pubDate = date('D, d M Y H:i:s O');
 		$source = $RSS_LOCATION.'rss.xml';
 		if (!copy( $source,$TEMP_LOCATION)) 
 		{
@@ -389,6 +390,7 @@ class writer {
 			$this->link($item->link);
 			$this->pubDate($item->pubDate);
 			$this->category($item->category);
+			$this->guid($item->link);
 			$this->citem();
 			$y = $y + 1;
 		}
