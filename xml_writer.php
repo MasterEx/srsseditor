@@ -345,6 +345,7 @@ class writer {
 				$this->link($link);
 				$this->pubDate($pubDate);
 				$this->category($category);
+				$this->guid($item->link);
 				$this->citem();
 				$y = $y + 1;
 				continue;
@@ -354,6 +355,7 @@ class writer {
 			$this->description($item->description);
 			$this->link($item->link);
 			$this->pubDate($item->pubDate);
+			$this->guid($item->link);
 			$this->category($item->category);
 			$this->citem();
 			$y = $y + 1;
