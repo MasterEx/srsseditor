@@ -88,7 +88,7 @@ if(strcmp($_SESSION['id'],'admin')===0)
 					<input type="hidden" name="title" value="'.$_POST['title'].'">
 					<input type="hidden" name="description" value=\''.$_POST['description'].'\'>
 					<input type="hidden" name="link" value="'.$_POST['link'].'">
-					<input type="hidden" name="category" value='.$_POST['category'].'">
+					<input type="hidden" name="category" value="'.$_POST['category'].'">
 					<table>
 						<tr>
 							<td>If you want to perform update now click<td>
